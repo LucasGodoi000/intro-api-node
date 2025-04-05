@@ -12,7 +12,7 @@ module.exports ={
             return response.status(500).json({
                 sucesso: false,
                 mensagem: 'Erro na Listagem de Ambientes.',
-                dados: errpr.message
+                dados: error.message
             
             });
         }   
@@ -28,7 +28,7 @@ module.exports ={
             return response.status(500).json({
                 sucesso: false,
                 mensagem: 'Erro na Listagem de Ambientes.',
-                dados: errpr.message
+                dados: error.message
             
             });
         }   
@@ -44,7 +44,7 @@ module.exports ={
             return response.status(500).json({
                 sucesso: false,
                 mensagem: 'Erro na Listagem de Ambientes.',
-                dados: errpr.message
+                dados: error.message
             
             });
         }   
@@ -60,7 +60,7 @@ module.exports ={
             return response.status(500).json({
                 sucesso: false,
                 mensagem: 'Erro na Listagem de Ambientes.',
-                dados: errpr.message
+                dados: error.message
             
             });
         }   
