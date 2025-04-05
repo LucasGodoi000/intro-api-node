@@ -27,7 +27,7 @@ module.exports ={
         } catch (error) {
             return response.status(500).json({
                 sucesso: false,
-                mensagem: 'Erro na Listagem de usuários.',
+                mensagem: 'Erro no cadastro de usuários.',
                 dados: error.message
             
             });
@@ -43,7 +43,7 @@ module.exports ={
         } catch (error) {
             return response.status(500).json({
                 sucesso: false,
-                mensagem: 'Erro na Listagem de usuários.',
+                mensagem: 'Erro na edição de usuários.',
                 dados: error.message
             
             });
@@ -59,7 +59,7 @@ module.exports ={
         } catch (error) {
             return response.status(500).json({
                 sucesso: false,
-                mensagem: 'Erro na Listagem de usuários.',
+                mensagem: 'Erro na remoção de usuários.',
                 dados: error.message
             
             });

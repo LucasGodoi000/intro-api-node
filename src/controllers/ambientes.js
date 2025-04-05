@@ -27,7 +27,7 @@ module.exports ={
         } catch (error) {
             return response.status(500).json({
                 sucesso: false,
-                mensagem: 'Erro na Listagem de Ambientes.',
+                mensagem: 'Erro no Cadastro de Ambientes.',
                 dados: error.message
             
             });
@@ -43,7 +43,7 @@ module.exports ={
         } catch (error) {
             return response.status(500).json({
                 sucesso: false,
-                mensagem: 'Erro na Listagem de Ambientes.',
+                mensagem: 'Erro na edição de Ambientes.',
                 dados: error.message
             
             });
@@ -59,7 +59,7 @@ module.exports ={
         } catch (error) {
             return response.status(500).json({
                 sucesso: false,
-                mensagem: 'Erro na Listagem de Ambientes.',
+                mensagem: 'Erro na Remoção de Ambientes.',
                 dados: error.message
             
             });
