@@ -3,10 +3,20 @@ const db = require('../database/connection');
 module.exports ={
     async listarAmbientes (request, response) {
         try {
+
+            const sql = `
+            SELECT cond_id, amb_descricao, 
+            amb_nome, amb_capacidade
+            FROM ambientes;
+        `;
+        const [row] = await db.query(sql);
+        const nItens = row.length;
+
             return response.status(200).json({
                 sucesso: true,
                 mensagem: 'Lista de Ambientes.',
-                dados: null
+                nItens,
+                dados: row
             });
         } catch (error) {
             return response.status(500).json({

@@ -3,10 +3,21 @@ const db = require('../database/connection');
 module.exports ={
     async listarUsuariosApartamento (request, response) {
         try {
+
+            const sql = `
+                SELECT userap_id, userid, ap_id 
+                FROM usuario_apartamentos;
+            `;
+
+            const [row] = await db.query(sql);
+            const nItens = row.length;
+
+
             return response.status(200).json({
                 sucesso: true,
                 mensagem: 'Lista de usuários.',
-                dados: null
+                nItens,
+                dados: row
             });
         } catch (error) {
             return response.status(500).json({
