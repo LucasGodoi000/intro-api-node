@@ -29,9 +29,32 @@ module.exports ={
     },
     async cadastrarAmbientes (request, response) {
         try {
+
+            const { amb, cond, nome, descricao, capacidade} = request.body;
+            const amb_ativo = 1;
+
+            const sql = `
+                INSERT INTO ambientes
+                    ( amb, cond_id, amb_nome, amb_descricao, amb_capacidade )
+                VALUES
+                    (?, ?, ?, ?);
+            `;
+
+            const values = [amb, cond, nome, descricao, amb_ativo, capacidade];
+
+            const [result] = await db.query(sql, values);
+
+            const dados = {
+                id: result.insertId,
+                amb,
+                cond,
+                nome,
+                descricao,
+                capacidade
+            };
             return response.status(200).json({
                 sucesso: true,
-                mensagem: 'cadastro de Ambientes.',
+                mensagem: 'cadastro de Ambientes realizado com sucesso.',
                 dados: null
             });
         } catch (error) {

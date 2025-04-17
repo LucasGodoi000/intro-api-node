@@ -6,7 +6,7 @@ module.exports ={
 
             const sql = `
                 SELECT userap_id, userid, ap_id 
-                FROM usuario_apartamentos;
+                FROM usuario_apartamento;
             `;
 
             const [row] = await db.query(sql);
