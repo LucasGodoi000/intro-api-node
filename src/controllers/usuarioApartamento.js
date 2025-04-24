@@ -30,19 +30,36 @@ module.exports ={
     },
     async cadastrarUsuariosApartamento (request, response) {
         try {
+            const { userid, ap_id } = request.body;
+    
+            const sql = `
+                INSERT INTO Usuario_apartamento
+                    (userid, ap_id)
+                VALUES
+                    (?, ?);
+            `;
+    
+            const values = [userid, ap_id];
+            const [result] = await db.query(sql, values);
+    
+            const dados = {
+                id: result.insertId,
+                userid,
+                ap_id,
+            };
+    
             return response.status(200).json({
                 sucesso: true,
-                mensagem: 'cadastro de usuários.',
-                dados: null
+                mensagem: 'Cadastro de Usuário realizado com sucesso.',
+                dados
             });
         } catch (error) {
             return response.status(500).json({
                 sucesso: false,
-                mensagem: 'Erro no cadastro de usuários.',
+                mensagem: 'Erro no Cadastro de Usuário.',
                 dados: error.message
-            
             });
-        }   
+        }
     },
     async editarUsuariosApartamento (request, response) {
         try {

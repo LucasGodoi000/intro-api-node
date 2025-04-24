@@ -27,44 +27,40 @@ module.exports ={
             });
         }   
     },
-    async cadastrarAmbientes (request, response) {
+    async cadastrarAmbientes(request, response) {
         try {
-
-            const { amb, cond, nome, descricao, capacidade} = request.body;
-            const amb_ativo = 1;
-
+            const { cond, nome, descricao, capacidade } = request.body;
+    
             const sql = `
                 INSERT INTO ambientes
-                    ( amb, cond_id, amb_nome, amb_descricao, amb_capacidade )
+                    (cond_id, amb_nome, amb_descricao, amb_capacidade)
                 VALUES
                     (?, ?, ?, ?);
             `;
-
-            const values = [amb, cond, nome, descricao, amb_ativo, capacidade];
-
+    
+            const values = [cond, nome, descricao, capacidade];
             const [result] = await db.query(sql, values);
-
+    
             const dados = {
                 id: result.insertId,
-                amb,
                 cond,
                 nome,
                 descricao,
                 capacidade
             };
+    
             return response.status(200).json({
                 sucesso: true,
-                mensagem: 'cadastro de Ambientes realizado com sucesso.',
-                dados: null
+                mensagem: 'Cadastro de Ambientes realizado com sucesso.',
+                dados
             });
         } catch (error) {
             return response.status(500).json({
                 sucesso: false,
                 mensagem: 'Erro no Cadastro de Ambientes.',
                 dados: error.message
-            
             });
-        }   
+        }
     },
     async editarAmbientes (request, response) {
         try {
