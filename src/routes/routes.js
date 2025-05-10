@@ -9,7 +9,7 @@ router.get('/usuarioApartamento', usuarioApartamentoController.listarUsuariosApa
 
 router.post('/usuarioApartamento', usuarioApartamentoController.cadastrarUsuariosApartamento);
 
-router.patch('/usuarioApartamento', usuarioApartamentoController.editarUsuariosApartamento);
+router.patch('/usuarioApartamento/:id', usuarioApartamentoController.editarUsuariosApartamento);
 
 router.delete('/usuarioApartamento', usuarioApartamentoController.apagarUsuariosApartamento);
 
@@ -19,7 +19,7 @@ router.get('/ambientes', ambientesController.listarAmbientes);
 
 router.post('/ambientes', ambientesController.cadastrarAmbientes);
 
-router.patch('/ambientes', ambientesController.editarAmbientes);
+router.patch('/ambientes/:id', ambientesController.editarAmbientes);
 
 router.delete('/ambientes', ambientesController.apagarAmbientes);
 

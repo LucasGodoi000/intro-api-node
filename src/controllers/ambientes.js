@@ -64,6 +64,36 @@ module.exports ={
     },
     async editarAmbientes (request, response) {
         try {
+            const { cond, nome, descricao, capacidade } = request.body;
+    
+                const { id } = request.params;
+
+                const sql = `
+                UPDATE ambientes SET
+                    amb_cond = ?, amb_nome = ?, amb_descricao = ?, amb_capacidade = ?
+                WHERE
+                    amb_id = ?;
+                `
+
+                const values = [cond, nome, descricao, capacidade, id];
+
+                const [result] = await db.query(sql, values);
+
+                if (result.affectedRows ===0) {
+                    return response.status(404).json({
+                        sucesso : false,
+                        mensagem: `Ambiente ${id} não encontrado!`,
+                        dados : null
+                    })
+                }
+                
+                const dados = {
+                    cond,
+                    nome,
+                    descricao,
+                    capacidade
+                };
+
             return response.status(200).json({
                 sucesso: true,
                 mensagem: 'Editar Ambiente.',
