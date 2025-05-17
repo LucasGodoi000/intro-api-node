@@ -64,7 +64,7 @@ module.exports ={
     },
             async editarAmbientes (request, response) {
                 try {
-                    const { nome, descricao, capacidade } = request.body;
+        const { nome, descricao, capacidade } = request.body;
         const { id } = request.params;
 
         const sql = `
@@ -87,7 +87,6 @@ module.exports ={
                 }
                 
                 const dados = {
-                    cond,
                     nome,
                     descricao,
                     capacidade
