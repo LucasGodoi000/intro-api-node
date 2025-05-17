@@ -62,20 +62,19 @@ module.exports ={
             });
         }
     },
-    async editarAmbientes (request, response) {
-        try {
-            const { cond, nome, descricao, capacidade } = request.body;
-    
-                const { id } = request.params;
+            async editarAmbientes (request, response) {
+                try {
+                    const { nome, descricao, capacidade } = request.body;
+        const { id } = request.params;
 
-                const sql = `
-                UPDATE ambientes SET
-                    amb_cond = ?, amb_nome = ?, amb_descricao = ?, amb_capacidade = ?
-                WHERE
-                    amb_id = ?;
-                `
+        const sql = `
+            UPDATE ambientes SET
+            amb_nome = ?, amb_descricao = ?, amb_capacidade = ?
+            WHERE amb_id = ?;
+        `;
 
-                const values = [cond, nome, descricao, capacidade, id];
+        const values = [nome, descricao, capacidade, id];
+
 
                 const [result] = await db.query(sql, values);
 
@@ -96,8 +95,8 @@ module.exports ={
 
             return response.status(200).json({
                 sucesso: true,
-                mensagem: 'Editar Ambiente.',
-                dados: null
+                mensagem: `Ambiente ${id} editado com sucesso.`,
+                dados
             });
         } catch (error) {
             return response.status(500).json({
@@ -110,9 +109,25 @@ module.exports ={
     },
     async apagarAmbientes (request, response) {
         try {
+
+            const { id } = request.params;
+
+            const sql = `DELETE FROM ambientes WHERE amb_id = ?;`;
+            const values = [id];
+
+            const [result] = await db.query(sql, values);
+
+            if (result.affectedRows ===0) {
+                return response.status(404).json({
+                    sucesso : false,
+                    mensagem: `Ambiente ${id} não encontrado!`,
+                    dados : null
+                })
+            }
+
             return response.status(200).json({
                 sucesso: true,
-                mensagem: 'Apagar Ambiente.',
+                mensagem: `Ambiente ${id} removido com sucesso.`,
                 dados: null
             });
         } catch (error) {

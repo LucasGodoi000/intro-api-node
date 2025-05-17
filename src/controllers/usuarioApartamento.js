@@ -63,10 +63,41 @@ module.exports ={
     },
     async editarUsuariosApartamento (request, response) {
         try {
+            const { userid, ap_id } = request.body;
+
+            const { id } = request.params;
+
+            const sql = `
+            UPDATE usuario_apartamento SET
+            userid = ?, ap_id = ?
+            WHERE
+            userap_id = ?;
+            `
+
+            const values = [userid, ap_id, id];
+
+            const [result] = await db.query(sql, values);
+
+            if (result.affectedRows === 0) {
+                return response.status(404).json({
+                    sucesso: false,
+                    mensagem: 'Usuário não encontrado.',
+                    dados: null
+                });
+            }
+
+            const dados = {
+                id,
+                userid,
+                ap_id,
+            };
+
+
+
             return response.status(200).json({
                 sucesso: true,
-                mensagem: 'Editar usuário.',
-                dados: null
+                mensagem: `Usuario_apartamento ${id} atualizado com sucesso.`,
+                dados
             });
         } catch (error) {
             return response.status(500).json({
@@ -79,9 +110,21 @@ module.exports ={
     },
     async apagarUsuariosApartamento (request, response) {
         try {
+
+            const { id } = request.params;
+            const sql = `DELETE FROM usuario_apartamento WHERE userap_id = ?;`;
+            const values = [id];
+            const [result] = await db.query(sql, values);
+            if (result.affectedRows ===0) {
+                return response.status(404)({
+                    sucesso: false,
+                    mensagem: `Usuario ${userap_id} não encontrado!`,
+                    dados: null
+                });
+            }
             return response.status(200).json({
                 sucesso: true,
-                mensagem: 'Apagar usuário.',
+                mensagem: `Usuario ${userap_id} removido com sucesso.`,
                 dados: null
             });
         } catch (error) {
